@@ -150,10 +150,11 @@ class OperationManager:
     def run(self):
         
         while True:
-            choice = self.print_menu()
-            if choice == 1:
-                self.user()
-            elif choice == 3:
-                self.UserManager.view_users()
-            else:
-                break
+            self.buy_products('nilavan_93')
+            # choice = self.print_menu()
+            # if choice == 1:
+            #     self.user()
+            # elif choice == 3:
+            #     self.UserManager.view_users()
+            # else:
+            #     break
