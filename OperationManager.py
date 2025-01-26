@@ -150,6 +150,7 @@ class OperationManager:
     def run(self):
         
         while True:
+            self.buy_products('nilavan_93')
             choice = self.print_menu()
             if choice == 1:
                 self.user()

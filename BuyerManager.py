@@ -1,5 +1,5 @@
 from PickleHelper import load_cart, load_users, save_cart, save_order, save_products
-from Utils import generate_id
+from Utils import generate_id, validate_input
 
 CART_DATA_FILE = 'data/cart.pkl'
 ORDER_DATA_FILE = 'data/orders.pkl'
@@ -18,13 +18,16 @@ class BuyerManager:
                for seller, product in products.items():
                 print(f'Seller Id: {seller}')
                 for item in product:
-                    print(item)
+                     print(item)
 
     def buy_products(self, buyer_id, category, bucket = {}):
         flag = 'Y'
         self.view_products(category)
         while flag == 'Y':
-          selected_product = input('Select any product you want (i.e., Product ID): ')
+          selected_product = validate_input('Select any product you want (i.e., Product ID): ')
+          product = self.get_product_by_category_and_product_id(category, selected_product)
+          if product.inventory == 0:
+             return print(f'Product is out of stock.')
           if category not in bucket:
              bucket[category] = []
           bucket[category] = selected_product
@@ -38,7 +41,7 @@ class BuyerManager:
                 for item in product:
                     if item.product_id == pid:
                        return item
-        return print(f'There is no product')
+        return print(f'There is no product with this product id:{pid} under the category:{category}')
 
 
     def display_cart(self, cart):
