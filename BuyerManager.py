@@ -26,6 +26,8 @@ class BuyerManager:
         while flag == 'Y':
           selected_product = validate_input('Select any product you want (i.e., Product ID): ')
           product = self.get_product_by_category_and_product_id(category, selected_product)
+          if not product:
+            return print(f'There is no product with this product id:{selected_product} under the category:{category}') 
           if product.inventory == 0:
              return print(f'Product is out of stock.')
           if category not in bucket:
@@ -41,8 +43,7 @@ class BuyerManager:
                 for item in product:
                     if item.product_id == pid:
                        return item
-        return print(f'There is no product with this product id:{pid} under the category:{category}')
-
+        return None
 
     def display_cart(self, cart):
        quantity = 0
@@ -50,6 +51,8 @@ class BuyerManager:
        for category, items in cart.items():
           for item in items:
             product = self.get_product_by_category_and_product_id(category, int(item))
+            if not product:
+               break
             if product.inventory == 0:
                print(f'Currently their is no stock available for the product with product id: {product.product_id}')
                break
