@@ -1,6 +1,11 @@
 
 import random
 
+def print_menu(menu, user = ''):
+    print(f'---- WELCOME TO SUPER STORE {user} ----')
+    print('\n'.join(menu))
+    return validate_input(f'Enter your choice from 1 to {len(menu)}: ')
+
 def validate_input(message, start = 0, end = None):
     while True:
         user_input = input(message).strip()
